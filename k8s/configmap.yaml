@@ -1,0 +1,9 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: labtrack-config
+  labels:
+    app: labtrack-api
+data:
+  SERVER_PORT: "8080"
+  APP_ENV: "kubernetes"

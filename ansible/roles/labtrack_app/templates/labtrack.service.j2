@@ -1,0 +1,14 @@
+[Unit]
+Description=LabTrack API - Campus Laboratory Asset Management System
+After=network.target
+
+[Service]
+Type=simple
+User=root
+WorkingDirectory={{ app_dir }}
+ExecStart=/usr/bin/java -jar {{ app_dir }}/{{ jar_name }} --server.port={{ app_port }}
+Restart=on-failure
+RestartSec=10
+
+[Install]
+WantedBy=multi-user.target

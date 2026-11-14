@@ -1,0 +1,55 @@
+---
+- name: Check if Java runtime is already installed
+  ansible.builtin.command: which java
+  register: java_check
+  changed_when: false
+  failed_when: false
+
+- name: Install Java runtime if not present
+  ansible.builtin.apt:
+    name: "{{ java_package }}"
+    state: present
+    update_cache: true
+  when: install_java | bool and java_check.rc != 0
+
+- name: Verify Java runtime is available and capture version
+  ansible.builtin.command: java -version
+  register: java_version_output
+  changed_when: false
+
+- name: Report detected Java runtime version
+  ansible.builtin.debug:
+    msg: "Using Java runtime: {{ java_version_output.stderr_lines[0] | default('java detected') }}"
+
+- name: Ensure application directory exists
+  ansible.builtin.file:
+    path: "{{ app_dir }}"
+    state: directory
+    owner: root
+    group: root
+    mode: "0755"
+
+- name: Copy built LabTrack JAR to /opt/labtrack
+  ansible.builtin.copy:
+    src: "{{ local_jar_path }}"
+    dest: "{{ app_dir }}/{{ jar_name }}"
+    owner: root
+    group: root
+    mode: "0644"
+  notify: Restart labtrack service
+
+- name: Deploy systemd unit file for LabTrack API
+  ansible.builtin.template:
+    src: labtrack.service.j2
+    dest: "/etc/systemd/system/{{ app_name }}.service"
+    owner: root
+    group: root
+    mode: "0644"
+  notify: Restart labtrack service
+
+- name: Enable and start LabTrack service
+  ansible.builtin.systemd:
+    name: "{{ app_name }}"
+    enabled: true
+    state: started
+    daemon_reload: true

@@ -1,0 +1,6 @@
+---
+- name: Deploy and configure LabTrack API on Linux
+  hosts: labtrack_servers
+  become: true
+  roles:
+    - labtrack_app

@@ -1,0 +1,13 @@
+.git
+.gitignore
+ansible
+k8s
+docs
+src
+Jenkinsfile
+README.md
+repo_link.txt
+pom.xml
+mvnw
+mvnw.cmd
+.mvn

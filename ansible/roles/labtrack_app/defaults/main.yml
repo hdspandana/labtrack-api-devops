@@ -1,0 +1,9 @@
+---
+app_name: labtrack
+app_port: 8080
+app_dir: /opt/labtrack
+jar_name: labtrack-api.jar
+local_jar_path: "{{ playbook_dir }}/../target/labtrack-api.jar"
+# Use default-jre-headless (or override with e.g. openjdk-21-jre-headless)
+java_package: default-jre-headless
+install_java: true
