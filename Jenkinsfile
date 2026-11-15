@@ -13,15 +13,15 @@ pipeline {
         }
 
         stage('Test') {
-            steps {
-                bat '.\\mvnw.cmd test'
-            }
+           steps {
+               bat 'call mvnw.cmd test'
+           }
         }
 
         stage('Package') {
-            steps {
-                bat '.\\mvnw.cmd package -DskipTests'
-            }
+           steps {
+               bat 'call mvnw.cmd package -DskipTests'
+          }
         }
     }
 
