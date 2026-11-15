@@ -28,3 +28,4 @@ LabTrack API is a lightweight Spring Boot 3 (Java 17 bytecode target) REST API f
 3. **Kali Linux (Bash)**: Used for Ansible configuration management (`localhost` target) and systemd service verification.
 
 See `docs/implementation-guide.md` for step-by-step beginner-friendly instructions and expected success conditions, and `docs/evidence-checklist.md` for assignment verification.
+Jenkins SCM polling verification
