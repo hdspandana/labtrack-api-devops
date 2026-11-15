@@ -29,5 +29,5 @@ if not exist "%WRAPPER_JAR%" (
   if errorlevel 1 exit /b %errorlevel%
 )
 
-java -Dmaven.multiModuleProjectDirectory="%BASE_DIR%" -classpath "%WRAPPER_JAR%" org.apache.maven.wrapper.MavenWrapperMain %*
+java -Dmaven.multiModuleProjectDirectory="%BASE_DIR%." -classpath "%WRAPPER_JAR%" org.apache.maven.wrapper.MavenWrapperMain %*
 exit /b %errorlevel%
